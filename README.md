@@ -1,8 +1,18 @@
+# TODOS Admin
+
+Next.js application with RESTful API handlers.
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
 
-First, run the development server:
+First, run the database engine through Docker:
+
+```bash
+docker compose up -d
+```
+
+Run the development server:
 
 ```bash
 npm run dev
