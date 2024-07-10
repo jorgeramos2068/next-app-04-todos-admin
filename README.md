@@ -16,7 +16,9 @@ docker compose up -d
 
 3. Replace variable values in `.env`.
 
-4. Run the development server:
+4. Execute seed to [create a local database](http://localhost:3000/api/seed).
+
+5. Run the development server:
 
 ```bash
 npm run dev
