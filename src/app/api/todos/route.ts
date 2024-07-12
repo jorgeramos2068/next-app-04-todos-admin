@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 
 import prisma from '@/lib/prisma';
+import { postTodosSchema } from '@/schemas';
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -19,4 +20,18 @@ export async function GET(request: Request) {
   });
 
   return NextResponse.json(todos);
+}
+
+export async function POST(request: Request) {
+  try {
+    const body = await postTodosSchema.validate(await request.json());
+    const newTodo = {
+      description: body.description,
+      complete: body.complete,
+    };
+    const todo = await prisma.todo.create({ data: newTodo });
+    return NextResponse.json(todo);
+  } catch (error) {
+    return NextResponse.json(error, { status: 400 });
+  }
 }
