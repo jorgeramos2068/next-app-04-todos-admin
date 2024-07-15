@@ -12,13 +12,37 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 docker compose up -d
 ```
 
-2. Rename `.env.template` file to `.env`.
+2. Copy the `.env.template` file and rename the new file to `.env`.
 
 3. Replace variable values in `.env`.
 
-4. Execute seed to [create a local database](http://localhost:3000/api/seed).
+4. Install node dependencies with:
 
-5. Run the development server:
+```bash
+npm install
+```
+
+5. Run the application with:
+
+```bash
+npm run dev
+```
+
+6. Run a Prisma migration:
+
+```bash
+npx prisma migrate dev
+```
+
+7. Generate the Prisma client:
+
+```bash
+npx prisma generate
+```
+
+8. Execute seed to [create a local database](http://localhost:3000/api/seed).
+
+9. Run the development server:
 
 ```bash
 npm run dev
@@ -30,7 +54,7 @@ pnpm dev
 bun dev
 ```
 
-5. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+10. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
