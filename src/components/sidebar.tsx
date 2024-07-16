@@ -3,8 +3,27 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { CiLogout } from 'react-icons/ci';
+import { IoCalendarOutline, IoCheckboxOutline, IoListOutline } from 'react-icons/io5';
 
 import { SidebarItem } from './sidebar-item';
+
+const MENU_ITEMS = [
+  {
+    title: 'Dashboard',
+    path: '/dashboard',
+    icon: <IoCalendarOutline />,
+  },
+  {
+    title: 'Rest Todos',
+    path: '/dashboard/rest-todos',
+    icon: <IoCheckboxOutline />,
+  },
+  {
+    title: 'Server Actions',
+    path: '/dashboard/server-todos',
+    icon: <IoListOutline />,
+  },
+];
 
 export const Sidebar: React.FC = () => {
   return (
@@ -35,8 +54,9 @@ export const Sidebar: React.FC = () => {
         </div>
 
         <ul className="space-y-2 tracking-wide mt-8">
-          <SidebarItem title="Dashboard" href="#" />
-          <SidebarItem title="Categories" href="#" />
+          {MENU_ITEMS.map(({ title, path, icon }) => (
+            <SidebarItem key={path} title={title} path={path} icon={icon} />
+          ))}
         </ul>
       </div>
 

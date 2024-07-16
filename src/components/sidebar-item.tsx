@@ -1,23 +1,31 @@
+'use client';
+
 import * as React from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 import { CiBookmarkCheck } from 'react-icons/ci';
 
 interface Props {
   title: string;
-  href: string;
+  path: string;
+  icon: React.ReactNode;
 }
 
-export const SidebarItem: React.FC<Props> = ({ title, href }) => {
-  // Active className: text-white bg-gradient-to-r from-sky-600 to-cyan-400 */
+export const SidebarItem: React.FC<Props> = ({ title, path, icon }) => {
+  const pathname = usePathname();
+
+  // Active className:  */
   return (
     <li>
       <Link
-        href="#"
-        className="relative px-4 py-3 flex items-center space-x-4 rounded-xl text-white bg-gradient-to-r from-sky-600 to-cyan-400"
+        href={path}
+        className={`px-4 py-3 flex items-center space-x-4 rounded-md text-gray-600 group hover:bg-gradient-to-r hover:bg-sky-600 hover:text-white  ${
+          path === pathname ? 'text-white bg-gradient-to-r from-sky-600 to-cyan-400' : ''
+        }`}
       >
-        <CiBookmarkCheck size={30} />
-        <span className="-mr-1 font-medium">{title}</span>
+        {icon}
+        <span className="group-hover:text-white">{title}</span>
       </Link>
     </li>
   );
