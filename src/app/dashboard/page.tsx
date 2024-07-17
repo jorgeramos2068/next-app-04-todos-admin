@@ -1,4 +1,4 @@
-import { WidgetItem } from '@/components/widget-item';
+import { WidgetItem } from '@/components/layout/widget-item';
 
 export default function Page() {
   return (
