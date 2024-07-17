@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 
-import { TodosGrid } from '@/components';
+import { TodosGrid } from '@/components/todos';
 import prisma from '@/lib/prisma';
 
 export const metadata: Metadata = {
