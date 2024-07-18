@@ -9,12 +9,12 @@ import styles from './todo-item.module.css';
 
 interface Props {
   todo: Todo;
-  updateTodo: (id: string, complete: boolean) => Promise<Todo>;
+  toggleTodo: (id: string, complete: boolean) => Promise<Todo>;
 }
 
-export const TodoItem: React.FC<Props> = ({ todo, updateTodo }) => {
-  const toggleTodo = (): void => {
-    updateTodo(todo.id, !todo.complete);
+export const TodoItem: React.FC<Props> = ({ todo, toggleTodo }) => {
+  const handleToggleTodo = (): void => {
+    toggleTodo(todo.id, !todo.complete);
   };
 
   return (
@@ -24,7 +24,7 @@ export const TodoItem: React.FC<Props> = ({ todo, updateTodo }) => {
           className={`cursor-pointer flex p-2 rounded-md hover:bg-opacity-60 ${
             todo.complete ? 'bg-blue-100' : 'bg-red-100'
           }`}
-          onClick={toggleTodo}
+          onClick={handleToggleTodo}
         >
           {todo.complete ? <IoCheckboxOutline size={30} /> : <IoSquareOutline size={30} />}
         </div>
