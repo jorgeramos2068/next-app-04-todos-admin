@@ -17,3 +17,10 @@ export const createTodo = async (description: string): Promise<Todo> => {
     headers: { 'Content-Type': 'application/json' },
   }).then(resp => resp.json());
 };
+
+export const deleteCompletedTodos = async (): Promise<Todo[]> => {
+  return await fetch('/api/todos', {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json' },
+  }).then(resp => resp.json());
+};

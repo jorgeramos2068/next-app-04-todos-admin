@@ -17,6 +17,9 @@ export async function GET(request: Request) {
   const todos = await prisma.todo.findMany({
     take: parsedTake,
     skip: parsedSkip,
+    orderBy: {
+      id: 'desc',
+    },
   });
 
   return NextResponse.json(todos);
@@ -31,6 +34,19 @@ export async function POST(request: Request) {
     };
     const todo = await prisma.todo.create({ data: newTodo });
     return NextResponse.json(todo);
+  } catch (error) {
+    return NextResponse.json(error, { status: 400 });
+  }
+}
+
+export async function DELETE() {
+  try {
+    const todos = await prisma.todo.deleteMany({
+      where: {
+        complete: true,
+      },
+    });
+    return NextResponse.json(todos);
   } catch (error) {
     return NextResponse.json(error, { status: 400 });
   }

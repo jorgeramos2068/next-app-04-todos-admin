@@ -1,9 +1,11 @@
 'use client';
 
-import { createTodo } from '@/helpers';
-import { useRouter } from 'next/navigation';
 import * as React from 'react';
+import { useRouter } from 'next/navigation';
+
 import { IoTrashOutline } from 'react-icons/io5';
+
+import { createTodo, deleteCompletedTodos } from '@/helpers';
 
 export const NewTodo = () => {
   const router = useRouter();
@@ -11,6 +13,11 @@ export const NewTodo = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setDescription(e.target.value);
+  };
+
+  const handleDelete = async () => {
+    await deleteCompletedTodos();
+    router.refresh();
   };
 
   const onSubmit = async (e: React.FormEvent): Promise<void> => {
@@ -40,12 +47,12 @@ export const NewTodo = () => {
       </button>
       <span className="flex flex-1"></span>
       <button
-        //TODO: onClick={ () => deleteCompleted() }
         type="button"
         className="flex items-center justify-center rounded ml-2 bg-red-400 p-2 text-white hover:bg-red-700 transition-all"
+        onClick={handleDelete}
       >
         <IoTrashOutline />
-        Delete
+        Delete completed
       </button>
     </form>
   );
