@@ -1,11 +1,11 @@
 import { Metadata } from 'next';
 
-import { TodosGrid } from '@/components/todos';
-import prisma from '@/lib/prisma';
 import { NewTodo } from '@/components/todos/new-todo';
+import { SATodosGrid } from '@/components/todos/sa-todos-grid';
+import prisma from '@/lib/prisma';
 
 export const metadata: Metadata = {
-  title: 'Todos List',
+  title: 'Server Todos List',
   description: 'Description for Todos List page',
 };
 
@@ -14,10 +14,11 @@ export default async function Page() {
 
   return (
     <div>
+      <span className="text-3xl mb-10"></span>
       <div className="mb-5 mx-5 px-5 w-full">
         <NewTodo />
       </div>
-      <TodosGrid todos={todos} />
+      <SATodosGrid todos={todos} />
     </div>
   );
 }
