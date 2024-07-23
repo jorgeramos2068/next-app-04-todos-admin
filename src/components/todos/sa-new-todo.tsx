@@ -4,7 +4,7 @@ import * as React from 'react';
 
 import { IoTrashOutline } from 'react-icons/io5';
 
-import { addTodo } from '@/actions/todos.actions';
+import { addTodo, deleteCompleted } from '@/actions/todos.actions';
 
 export const NewTodo = () => {
   const [description, setDescription] = React.useState('');
@@ -14,7 +14,7 @@ export const NewTodo = () => {
   };
 
   const handleDelete = async () => {
-    // await deleteCompletedTodos();
+    await deleteCompleted();
   };
 
   const onSubmit = async (e: React.FormEvent): Promise<void> => {
