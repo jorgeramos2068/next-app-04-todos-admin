@@ -19,3 +19,16 @@ export const toggleTodo = async (id: string, complete: boolean): Promise<Todo> =
   revalidatePath('/dashboard/server-todos');
   return updatedTodo;
 };
+
+export const addTodo = async (description: string): Promise<Todo | null> => {
+  try {
+    const newTodo = {
+      description: description,
+    };
+    const todo = await prisma.todo.create({ data: newTodo });
+    revalidatePath('/dashboard/server-todos');
+    return todo;
+  } catch (error) {
+    return null;
+  }
+};

@@ -1,7 +1,6 @@
 'use client';
 
 import * as React from 'react';
-import { useRouter } from 'next/navigation';
 
 import { toggleTodo } from '@/actions/todos.actions';
 import { Todo } from '@prisma/client';
@@ -12,8 +11,6 @@ interface Props {
 }
 
 export const SATodosGrid: React.FC<Props> = ({ todos = [] }) => {
-  const router = useRouter();
-
   return (
     <div className="gap-2 grid grid-cols-1 sm:grid-cols-3">
       {todos.map(todo => (
