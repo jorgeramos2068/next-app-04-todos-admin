@@ -13,22 +13,32 @@ interface Props {
 }
 
 export const TodoItem: React.FC<Props> = ({ todo, toggleTodo }) => {
-  const handleToggleTodo = (): void => {
-    toggleTodo(todo.id, !todo.complete);
+  const [optimisticTodo, toggleOptimisticTodo] = React.useOptimistic(todo, (state, newCompleteValue: boolean) => ({
+    ...state,
+    complete: newCompleteValue,
+  }));
+
+  const handleToggleTodo = async (): Promise<void> => {
+    try {
+      React.startTransition(() => toggleOptimisticTodo(!optimisticTodo.complete));
+      await toggleTodo(optimisticTodo.id, !optimisticTodo.complete);
+    } catch (error) {
+      React.startTransition(() => toggleOptimisticTodo(!optimisticTodo.complete));
+    }
   };
 
   return (
-    <div className={todo.complete ? styles.todoDone : styles.todoPending}>
+    <div className={optimisticTodo.complete ? styles.todoDone : styles.todoPending}>
       <div className="flex flex-col gap-4 items-center justify-start sm:flex-row">
         <div
           className={`cursor-pointer flex p-2 rounded-md hover:bg-opacity-60 ${
-            todo.complete ? 'bg-blue-100' : 'bg-red-100'
+            optimisticTodo.complete ? 'bg-blue-100' : 'bg-red-100'
           }`}
           onClick={handleToggleTodo}
         >
-          {todo.complete ? <IoCheckboxOutline size={30} /> : <IoSquareOutline size={30} />}
+          {optimisticTodo.complete ? <IoCheckboxOutline size={30} /> : <IoSquareOutline size={30} />}
         </div>
-        <div className="text-center sm:text-left">{todo.description}</div>
+        <div className="text-center sm:text-left">{optimisticTodo.description}</div>
       </div>
     </div>
   );
